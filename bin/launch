@@ -2,6 +2,9 @@
 
 clear
 source ./bin/env
+
+[ ! -d $BIGBANG_HOME ] && ./bin/git_clone_bigbang
+
 ./bin/configure_host_os
 ./bin/create_k3d_cluster
 ./bin/login_registry1
