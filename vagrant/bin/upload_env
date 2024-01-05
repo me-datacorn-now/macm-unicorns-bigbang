@@ -1,0 +1,4 @@
+#!/bin/bash
+
+vagrant upload ./env /tmp/env
+
