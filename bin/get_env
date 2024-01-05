@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo cp /tmp/env ./bin/
+
