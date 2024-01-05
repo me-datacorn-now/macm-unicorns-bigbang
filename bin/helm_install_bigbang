@@ -1,0 +1,10 @@
+#!/bin/bash
+
+source ./bin/env
+
+helm upgrade --install bigbang $BIGBANG_HOME/chart \
+  --values https://repo1.dso.mil/big-bang/bigbang/-/raw/master/chart/ingress-certs.yaml \
+  --values $HOME/ib_creds.yaml \
+  --values $HOME/demo_values.yaml \
+  --namespace=bigbang --create-namespace
+

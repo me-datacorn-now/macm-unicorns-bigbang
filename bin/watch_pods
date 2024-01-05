@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#watch kubectl get po -A -o wide --show-labels
+watch kubectl get po -A -o wide
+

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+clear
+source ./bin/env
+./bin/configure_host_os
+./bin/create_k3d_cluster
+./bin/login_registry1
+./bin/install_flux
+./bin/create_helm_yaml_files
+./bin/helm_install_bigbang
+./bin/watch_pods
+

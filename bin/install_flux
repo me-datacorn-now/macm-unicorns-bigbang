@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source ./bin/env
+cd $BIGBANG_HOME
+$BIGBANG_HOME/scripts/install_flux.sh -u $REGISTRY1_USERNAME -p $REGISTRY1_PASSWORD
+# NOTE: After running this command the terminal may appear to be stuck on
+# "networkpolicy.networking.k8s.io/allow-webhooks created"
+# It's not stuck, the end of the .sh script has a kubectl wait command, give it 5 min
+# Also if you have slow internet/hardware you might see a false error message
+# error: timed out waiting for the condition on deployments/helm-controller
+
+# As long as the following command shows STATUS Running you're good to move on
+kubectl get pods --namespace=flux-system
+

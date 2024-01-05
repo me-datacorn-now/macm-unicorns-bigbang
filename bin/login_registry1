@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source bin/env
+echo $REGISTRY1_PASSWORD | docker login registry1.dso.mil --username $REGISTRY1_USERNAME --password-stdin
+

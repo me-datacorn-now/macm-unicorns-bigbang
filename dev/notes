@@ -1,0 +1,45 @@
+
+
+2024-01-05 18:47:11 UTC Fri
+
+https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/guides/deployment-scenarios/quickstart.md
+
+
+2024-01-05 21:42:32 UTC Fri
+
+clear &&  kubectl logs --namespace neuvector neuvector-enforcer-pod-zlvnq  | grep ERR
+
+2024-01-05T21:36:34.532|ERRO|AGT|container.criGetContainerSocketPath: Failed to get mounting container socket - endpoint=/run/containerd/containerd.sock error=<nil> id=1c6b5220d0792233728ef58bb4ab223d3ab7b0f9bbee70b9f95e247d93f76a63
+2024-01-05T21:36:34.934|ERRO|AGT|orchestration.GetK8sVersion: Get Version fail - error=Get "https://kubernetes.default/version": read tcp 10.42.0.36:50108->10.43.0.1:443: read: connection reset by peer
+2024-01-05T21:36:34.937|ERRO|AGT|orchestration.GetK8sVersion: Get Version fail - error=Get "https://kubernetes.default/apis/config.openshift.io/v1/clusteroperators/openshift-apiserver": read tcp 10.42.0.36:50130->10.43.0.1:443: read: connection reset by peer
+2024-01-05T21:36:35.577Z [ERROR] agent.anti_entropy: failed to sync remote state: error="No known Consul servers"
+2024-01-05T21:36:45.543|ERRO|AGT|probe.(*Probe).openProcMonitor: Unable to send mcast msg to proc connector - error=connection refused
+2024-01-05T21:36:45.543|ERRO|AGT|probe.(*Probe).cbOpenNetlinkSockets: error: proc monitor communication - error=connection refused i=1
+2024-01-05T21:36:48.544|ERRO|AGT|probe.(*Probe).openProcMonitor: Unable to send mcast msg to proc connector - error=connection refused
+2024-01-05T21:36:48.544|ERRO|AGT|probe.(*Probe).cbOpenNetlinkSockets: error: proc monitor communication - error=connection refused i=2
+2024-01-05T21:36:51.548|ERRO|AGT|probe.(*Probe).openProcMonitor: Unable to send mcast msg to proc connector - error=connection refused
+2024-01-05T21:36:51.548|ERRO|AGT|probe.(*Probe).cbOpenNetlinkSockets: error: proc monitor communication - error=connection refused i=3
+2024-01-05T21:36:54.549|ERRO|AGT|probe.(*Probe).openProcMonitor: Unable to send mcast msg to proc connector - error=connection refused
+2024-01-05T21:36:54.549|ERRO|AGT|probe.(*Probe).cbOpenNetlinkSockets: error: proc monitor communication - error=connection refused i=4
+2024-01-05T21:36:57.549|ERRO|AGT|probe.(*Probe).openProcMonitor: Unable to send mcast msg to proc connector - error=connection refused
+2024-01-05T21:36:57.549|ERRO|AGT|probe.(*Probe).cbOpenNetlinkSockets: error: proc monitor communication - error=connection refused i=5
+2024-01-05T21:36:57.549|ERRO|AGT|probe.(*Probe).cbOpenNetlinkSockets: Failed to establish proc monitor communication - error=connection refused
+2024-01-05T21:36:57.565|ERRO|AGT|probe.NewFsnCenter: FSN: Initialize - error=too many open files
+2024-01-05T21:36:57.565|ERRO|AGT|probe.New: FSN: failed
+2024-01-05T21:36:57.625|ERRO|AGT|system.(*SystemTools).CheckHostProgram: Done - error=exit status 255 msg=Failed to run script: ret=1
+2024-01-05T21:36:57.625|ERRO|AGT|main.(*Bench).checkRequiredHostProgs: - error=exit status 255 program=pgrep
+2024-01-05T21:36:57.627|ERRO|AGT|system.(*SystemTools).CheckHostProgram: Done - error=exit status 255 msg=Failed to run script: ret=1
+2024-01-05T21:36:57.628|ERRO|AGT|main.(*Bench).checkRequiredHostProgs: - error=exit status 255 program=pgrep
+2024-01-05T21:36:57.628|ERRO|AGT|main.(*Bench).RerunKube: Cannot run master node CIS benchmark - error=pgrep command not found.
+2024-01-05T21:36:57.639|ERRO|AGT|main.(*Bench).RerunKube: Cannot run worker node CIS benchmark - error=pgrep command not found.
+2024-01-05T21:36:57.65 |ERRO|AGT|fsmon.NewFileWatcher: Open inotify fail - error=too many open files
+2024-01-05T21:36:57.65 |ERRO|AGT|main.main: Failed to open file monitor! - error=too many open files
+
+
+2024-01-05 21:43:47 UTC Fri
+
+kubectl logs --namespace promtail promtail-promtail-mcm8d
+level=info ts=2024-01-05T21:41:40.00488251Z caller=promtail.go:133 msg="Reloading configuration file" md5sum=f304aed32adc3514a04cc28cf0ac00fc
+level=error ts=2024-01-05T21:41:40.005320641Z caller=main.go:170 msg="error creating promtail" error="failed to make file target manager: too many open files"
+
+
