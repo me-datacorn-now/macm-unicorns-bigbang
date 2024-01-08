@@ -11,5 +11,6 @@ source ./bin/env
 ./bin/install_flux
 ./bin/create_helm_yaml_files
 ./bin/helm_install_bigbang
-./bin/watch_pods
+# ./bin/watch_pods
+k9s -A
 
