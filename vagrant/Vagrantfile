@@ -21,13 +21,13 @@ Vagrant.configure("2") do |config|
   end
   
   # Give the VM a specific name
-  config.vm.define "big-bang-20230105" do |macm|
+  config.vm.define "big-bang-vm" do |bigbang|
     # Shell provisioner to execute commands
-    macm.vm.provision "shell", inline: <<-SHELL
+    bigbang.vm.provision "shell", inline: <<-SHELL
 
-      sudo adduser --disabled-password --gecos "" macm
-      echo 'macm:password' | sudo chpasswd 2>/dev/null
-      sudo usermod -aG sudo macm
+      sudo adduser --disabled-password --gecos "" bigbang
+      echo 'bigbang:bigbang' | sudo chpasswd 2>/dev/null
+      sudo usermod -aG sudo bigbang
 
       # install 1password
       curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
@@ -64,11 +64,15 @@ Vagrant.configure("2") do |config|
       # Install Helm
       curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-
       # install kubectl
       curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
       chmod +x kubectl
       sudo mv kubectl /usr/local/bin/
+
+      # install k9s
+      wget https://github.com/derailed/k9s/releases/download/v0.30.8/k9s_linux_amd64.deb
+      sudo apt -y install -f ./k9s_linux_amd64.deb
+      rm k9s_linux_amd64.deb
 
       # Needed for ECK to run correctly without OOM errors
       echo 'vm.max_map_count=524288' | sudo tee -a /etc/sysctl.d/vm-max_map_count.conf
@@ -103,8 +107,8 @@ Vagrant.configure("2") do |config|
       # cat /proc/swaps
       # cat /etc/fstab
 
-      # sudo useradd -m -p $(openssl passwd -1 password) macm
-      sudo usermod -aG docker macm
+      # sudo useradd -m -p $(openssl passwd -1 password) bigbang
+      sudo usermod -aG docker bigbang
       
       sudo shutdown now
 

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export VM_NAME="big-bang-$(date "+%Y%m%d-%k%M%S")"
+vagrant up
