@@ -43,3 +43,20 @@ level=info ts=2024-01-05T21:41:40.00488251Z caller=promtail.go:133 msg="Reloadin
 level=error ts=2024-01-05T21:41:40.005320641Z caller=main.go:170 msg="error creating promtail" error="failed to make file target manager: too many open files"
 
 
+2024-01-08  9:34:44 CST Mon
+
+vagrant plugin install vagrant-vbguest
+
+
+2024-01-08 14:45:40 CST Mon
+
+addons:
+  argocd:
+    enabled: true
+    values: # Everything indented under 'values:' is passed onto the child chart
+      istio:
+        enabled: true
+      upgradeJob:
+        enabled: false
+
+
