@@ -27,9 +27,25 @@ Vagrant.configure("2") do |config|
     # Shell provisioner to execute commands
     bigbang.vm.provision "shell", inline: <<-SHELL
 
-      sudo adduser --disabled-password --gecos "" bigbang
-      echo 'bigbang:bigbang' | sudo chpasswd 2>/dev/null
-      sudo usermod -aG sudo bigbang
+      export BIGBANG_USER=bigbang
+      export BIGBANG_PASSWORD=${BIGBANG_USER}
+
+      sudo adduser --disabled-password --gecos "" ${BIGBANG_USER}
+      echo "${BIGBANG_USER}:${BIGBANG_USER}" | sudo chpasswd 2>/dev/null
+      sudo usermod -aG sudo ${BIGBANG_PASSWORD}
+
+      mkdir -p /home/${BIGBANG_USER}/git
+      
+      cd /home/${BIGBANG_USER}/git/
+      git clone https://github.com/me-datacorn-now/macm-unicorns-bigbang.git
+      git clone https://repo1.dso.mil/big-bang/bigbang.git
+      git logs | head
+      git checkout tags/$(grep 'tag:' base/gitrepository.yaml | awk '{print $2}')      
+      git logs | head
+
+      sudo mv /tmp/env /home/bigbang/git/
+
+      sudo chown -R ${BIGBANG_USER}:${BIGBANG_USER} /home/${BIGBANG_USER}
 
       # install 1password
       curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
