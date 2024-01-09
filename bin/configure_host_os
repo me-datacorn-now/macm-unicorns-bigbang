@@ -35,3 +35,7 @@ sudo swapoff -a
 # cat /proc/swaps
 # cat /etc/fstab
 
+# https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/guides/deployment-scenarios/quickstart.md?ref_type=heads#too-many-open-files
+sudo sysctl fs.inotify.max_queued_events=616384
+sudo sysctl fs.inotify.max_user_instances=512
+sudo sysctl fs.inotify.max_user_watches=501208
