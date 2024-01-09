@@ -18,6 +18,8 @@ Vagrant.configure("2") do |config|
 
     # Set video memory to 64 MB
     vb.customize ["modifyvm", :id, "--vram", "64"]    
+
+    config.vm.provision "file", source: "./env", destination: "/tmp/env"
   end
   
   # Give the VM a specific name
