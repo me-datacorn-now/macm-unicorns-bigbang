@@ -14,7 +14,8 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--graphicscontroller", "VMSVGA"]    
 
     # Set vbguest plugin to auto update Guest Additions
-    config.vbguest.auto_update = true    
+    # config.vbguest.auto_update = true
+    config.vbguest.auto_update = false if Vagrant.has_plugin?('vagrant-vbguest')   
 
     # Set video memory to 64 MB
     vb.customize ["modifyvm", :id, "--vram", "64"]    
@@ -29,6 +30,7 @@ Vagrant.configure("2") do |config|
 
       export BIGBANG_USER=bigbang
       export BIGBANG_PASSWORD=${BIGBANG_USER}
+      export GIT_BRANCH=dev-macm-20240105
 
       sudo adduser --disabled-password --gecos "" ${BIGBANG_USER}
       echo "${BIGBANG_USER}:${BIGBANG_USER}" | sudo chpasswd 2>/dev/null
@@ -37,13 +39,13 @@ Vagrant.configure("2") do |config|
       mkdir -p /home/${BIGBANG_USER}/git
       
       cd /home/${BIGBANG_USER}/git/
-      git clone https://github.com/me-datacorn-now/macm-unicorns-bigbang.git
+      git clone -b ${GIT_BRANCH} https://github.com/me-datacorn-now/macm-unicorns-bigbang.git
       git clone https://repo1.dso.mil/big-bang/bigbang.git
       git logs | head
       git checkout tags/$(grep 'tag:' base/gitrepository.yaml | awk '{print $2}')      
       git logs | head
 
-      sudo mv /tmp/env /home/bigbang/git/
+      sudo mv /tmp/env /home/bigbang/git/macm-unicorns-bigbang/bin/
 
       sudo chown -R ${BIGBANG_USER}:${BIGBANG_USER} /home/${BIGBANG_USER}
 
